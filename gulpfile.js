@@ -18,6 +18,7 @@ var lib = require('bower-files')({
   }
 });
 var browserSync = require('browser-sync').create();
+var concat = require('gulp-concat');
 var buildProduction = utilities.env.production;
 
 gulp.task('myTask', function(){
@@ -95,4 +96,10 @@ gulp.task('jsBuild', ['jsBrowserify', 'jshint'], function(){
 
 gulp.task('bowerBuild', ['bower'], function(){
   browserSync.reload();
+});
+
+gulp.task("cssBuild", function() {
+  gulp.src(['styles/*.css'])
+  .pipe(concat('vendor.css'))
+  .pipe(gulp.dest('./build/css'))
 });
